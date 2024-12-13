@@ -1,0 +1,85 @@
+<section>
+  <div class="create_fields">
+    <form [formGroup]="createFieldForm" (ngSubmit)="onSubmit()">
+      <div class="field_name">
+        <label for="field_name">Field name</label>
+        <input id="field_name" type="text" formControlName="name" />
+        <div
+          *ngIf="
+            submitted &&
+            createFieldForm.get('name')?.invalid &&
+            createFieldForm.get('name')?.touched
+          "
+        >
+          <small *ngIf="createFieldForm.get('name')?.errors?.['required']">
+            El nombre es obligatorio.
+          </small>
+        </div>
+      </div>
+
+      <div class="options">
+        <span>Field type</span>
+        <label for="unique-radio-1">
+          <input
+            type="radio"
+            id="unique-radio-1"
+            name="field_type"
+            value="text"
+            checked
+            formControlName="field_type"
+          />
+          Text
+        </label>
+
+        <label for="unique-radio-2">
+          <input
+            type="radio"
+            id="unique-radio-2"
+            name="field_type"
+            value="number"
+            formControlName="field_type"
+          />
+          Number
+        </label>
+
+        <label for="unique-radio-3">
+          <input
+            type="radio"
+            id="unique-radio-3"
+            name="field_type"
+            value="button"
+            formControlName="field_type"
+          />
+          Button
+        </label>
+      </div>
+      <button
+        class="create"
+        type="submit"
+        [disabled]="submitted && createFieldForm.invalid"
+      >
+        Create
+      </button>
+    </form>
+
+    <ul class="list_fields">
+      <li *ngFor="let field of listFields; let i = index">
+        <strong>{{ field.name }}</strong> ({{ field.field_type }})
+
+        <button *ngIf="field.field_type === 'button'">
+          {{ field.name }}
+        </button>
+
+        <div class="field" *ngIf="field.field_type !== 'button'">
+          <label [for]="field.name">{{ field.name }}</label>
+          <input [type]="field.field_type" disabled />
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container_view">
+    <h3>View fields</h3>
+    <main class="fields_view"></main>
+  </div>
+</section>

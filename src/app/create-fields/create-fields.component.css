@@ -1,0 +1,112 @@
+section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.create_fields {
+  width: 500px;
+}
+
+.container_view {
+  width: 600px;
+}
+
+h3 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.fields_view {
+  border: 5px dotted #AEC3B0;
+  min-height: 600px;
+  margin: 20px 0;
+  background-color: #124559;
+  border-radius: 8px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: max-content;
+  & button {
+    width: max-content;
+  }
+
+  & .create {
+    cursor: pointer;
+    color: #EFF6E0;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 25px;
+    background-color: #598392;
+    &:hover {
+      opacity: .8;
+    }
+  }
+}
+
+.field_name {
+  display: flex;
+  gap: 5px;
+}
+
+.options {
+  display: flex;
+  gap: 15px;
+}
+
+.list_fields {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+  gap: 30px;
+  border-top: 1px solid #AEC3B0;
+  padding: 15px 20px;
+  list-style: none;
+  & li {
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+  }
+  & button {
+    width: 100%;
+    position: relative;
+    margin: 10px 0;
+    max-width: max-content;
+    &::after {
+      content: "";
+      cursor: grab;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  & .field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border: 1px solid #AEC3B0;
+    padding: 10px;
+    text-transform: capitalize;
+    margin: 10px 0;
+    border-radius: 4px;
+    width: 100%;
+    position: relative;
+    max-width: max-content;
+    &::after {
+      content: "";
+      cursor: grab;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+}
