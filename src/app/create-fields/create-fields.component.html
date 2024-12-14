@@ -62,8 +62,19 @@
       </button>
     </form>
 
-    <ul class="list_fields">
-      <li *ngFor="let field of listFields; let i = index">
+    <ul
+      class="list_fields"
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="listFields"
+      [cdkDropListConnectedTo]="[doneList]"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <li
+        *ngFor="let field of listFields; let i = index"
+        cdkDrag
+        cdkDragPreviewContainer="parent"
+      >
         <strong>{{ field.name }}</strong> ({{ field.field_type }})
 
         <button *ngIf="field.field_type === 'button'">
@@ -80,6 +91,30 @@
 
   <div class="container_view">
     <h3>View fields</h3>
-    <main class="fields_view"></main>
+    <ul
+      class="fields_view"
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="listViewFields"
+      [cdkDropListConnectedTo]="[todoList]"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <li
+        *ngFor="let field of listViewFields; let i = index"
+        cdkDrag
+        cdkDragPreviewContainer="parent"
+      >
+        <strong>{{ field.name }}</strong> ({{ field.field_type }})
+
+        <button *ngIf="field.field_type === 'button'">
+          {{ field.name }}
+        </button>
+
+        <div class="field" *ngIf="field.field_type !== 'button'">
+          <label [for]="field.name">{{ field.name }}</label>
+          <input [type]="field.field_type" disabled />
+        </div>
+      </li>
+    </ul>
   </div>
 </section>

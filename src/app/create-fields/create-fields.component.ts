@@ -1,3 +1,10 @@
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+  CdkDropList,
+} from '@angular/cdk/drag-drop';
 import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import {
@@ -15,7 +22,7 @@ interface Field {
 @Component({
   selector: 'app-create-fields',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, NgFor],
+  imports: [ReactiveFormsModule, NgIf, NgFor, CdkDrag, CdkDropList],
   templateUrl: './create-fields.component.html',
   styleUrl: './create-fields.component.css',
 })
@@ -23,6 +30,7 @@ export class CreateFieldsComponent {
   createFieldForm: FormGroup;
   submitted = false;
   listFields: Field[] = [];
+  listViewFields: Field[] = [];
 
   constructor(private formBuilder: FormBuilder) {
     this.createFieldForm = this.formBuilder.group({
@@ -46,5 +54,35 @@ export class CreateFieldsComponent {
     } else {
       console.log('Formulario inválido:', this.createFieldForm.value);
     }
+  }
+
+  drop(event: CdkDragDrop<Field[]>) {
+    const { container, previousContainer, previousIndex, currentIndex } = event;
+    const isSameContainer = previousContainer === container;
+
+    if (isSameContainer && previousIndex === currentIndex) return;
+
+    console.log('Antes del cambio:', {
+      listFields: this.listFields,
+      listViewFields: this.listViewFields,
+      previousIndex,
+    });
+
+    if (previousContainer === container) {
+      moveItemInArray(container.data, previousIndex, currentIndex);
+    } else {
+      transferArrayItem(
+        previousContainer.data,
+        container.data,
+        previousIndex,
+        currentIndex
+      );
+    }
+
+    console.log('Después del cambio:', {
+      listFields: this.listFields,
+      listViewFields: this.listViewFields,
+      currentIndex,
+    });
   }
 }
