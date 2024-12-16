@@ -4,6 +4,27 @@ section {
   gap: 25px;
 }
 
+
+.cdk-drag-preview {
+  background-color: #124559 !important;
+}
+.cdk-drag-placeholder {
+  opacity: 0.5;
+}
+
+/* border: 5px dotted #AEC3B0; */
+.cdk-drop-list-dragging {
+  outline: 5px dotted #EFF6E0;
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+.cdk-drop-list-receiving {
+  outline: 5px dotted #AEC3B0;
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
 .create_fields {
   width: 500px;
 }
@@ -19,16 +40,17 @@ h3 {
 }
 
 .fields_view {
-  min-height: 600px;
   margin: 20px 0;
   background-color: #124559;
   border-radius: 8px;
   padding: 20px;
   list-style: none;
   display: flex;
-  gap: 20px;
+  /* flex-direction: row; */
+  overflow: hidden;
   flex-flow: wrap;
-  align-content: flex-start;
+  min-height: 185px;
+  gap: 20px;
   & li {
     cursor: grab;
     display: flex;
@@ -171,23 +193,3 @@ form {
   }
 }
 
-.cdk-drag-preview {
-  background-color: #AEC3B0;
-}
-
-.cdk-drag-placeholder {
-  opacity: 0.5;
-}
-
-/* border: 5px dotted #AEC3B0; */
-.cdk-drop-list-dragging {
-  outline: 5px dotted #EFF6E0;
-  outline-offset: 2px;
-  border-radius: 10px;
-}
-
-.cdk-drop-list-receiving {
-  outline: 5px dotted #AEC3B0;
-  outline-offset: 2px;
-  border-radius: 10px;
-}
